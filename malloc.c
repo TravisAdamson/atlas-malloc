@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-static heap_t heap = {NULL, NULL, 0, 0, 0};
+static heap_t heap = {NULL, 0, 0, 0};
 
 /**
  * _malloc - Allocates memory in the heap

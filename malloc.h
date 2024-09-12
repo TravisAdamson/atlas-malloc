@@ -36,6 +36,7 @@ typedef struct heap_s
 } heap_t;
 
 void *naive_malloc(size_t size);
+header_t *n_move_block(size_t size);
 
 void *_malloc(size_t size);
 header_t *move_block(size_t size);

@@ -17,7 +17,7 @@ void *naive_malloc(size_t size)
 	if (!flag)
 	{
 		heap.first_block = sbrk(0);
-		while (heap.heap_size < (aligned_sz + BLOCK_SIZE))
+		while (heap.heap_size < (aligned_sz + 8))
 		{
 			/*Sets end of heap address*/
 			sbrk(getpagesize());
@@ -26,22 +26,22 @@ void *naive_malloc(size_t size)
 		/*Sets members of data struct*/
 		heap.first_block->total_bytes = aligned_sz;
 		heap.first_block->used_bytes = aligned_sz;
-		heap.heap_free = heap.heap_size - (BLOCK_SIZE + aligned_sz);
+		heap.heap_free = heap.heap_size - (8 + aligned_sz);
 		heap.total_blocks = 1;
 		ptr = heap.first_block + 1;
 		flag = 1;
 		return ((void *) ptr);
 	}
 	/*When not enough free memory, allocates more*/
-	while ((aligned_sz + BLOCK_SIZE) > heap.heap_free)
+	while ((aligned_sz + 8) > heap.heap_free)
 	{
 		sbrk(getpagesize());
 		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
 	/*Traversing Header Blocks and adjusting data structs*/
-	ptr = move_block((BLOCK_SIZE + aligned_sz));
+	ptr = move_block((8 + aligned_sz));
 	heap.total_blocks++;
-	heap.heap_free -= (BLOCK_SIZE + aligned_sz);
+	heap.heap_free -= (8 + aligned_sz);
 	return ((void *) ++ptr);
 }
 
@@ -51,27 +51,27 @@ void *naive_malloc(size_t size)
  * @size: Size user requests plus block header
  * Return: pointer to big enough chunk for size
 */
-header_t *move_block(size_t size)
+header_t *n_move_block(size_t size)
 {
 	size_t iter = 0, total = 0, used = 0;
 	header_t *current;
 
 	for (current = heap.first_block; iter < heap.total_blocks; iter++)
 	{
-		if (current->total_bytes >= (size - BLOCK_SIZE) && !current->used_bytes)
+		if (current->total_bytes >= (size - 8) && !current->used_bytes)
 			return (current);
 		total = current->total_bytes;
 		used = current->used_bytes;
 		if (size <= (current->total_bytes - current->used_bytes))
 		{
 			current = (header_t *)((char *)current + sizeof(header_t) + total);
-			current->total_bytes = total - used - BLOCK_SIZE;
-			current->used_bytes = size - BLOCK_SIZE;
+			current->total_bytes = total - used - 8;
+			current->used_bytes = size - 8;
 			return (current);
 		}
 		current = (header_t *)((char *)current + sizeof(header_t) + total);
 	}
-	current->total_bytes = size - BLOCK_SIZE;
-	current->used_bytes = size - BLOCK_SIZE;
+	current->total_bytes = size - 8;
+	current->used_bytes = size - 8;
 	return (current);
 }

@@ -11,4 +11,6 @@
 void _free(void *ptr)
 {
 	ptr = NULL;
+	printf("%p\n", ptr);
+
 }

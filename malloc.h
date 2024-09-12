@@ -7,7 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define BLOCK_SIZE sizeof(header_t);
+#define BLOCK_SIZE sizeof(header_t)
 
 /**
  * struct header_s - stores header data for each block

@@ -1,6 +1,6 @@
 #include "malloc.h"
 
-static heap_t heap = {NULL, 0, 0, 0};
+static n_heap_t heap = {NULL, 0, 0, 0};
 
 /**
  * _malloc - Allocates memory in the heap
@@ -23,7 +23,6 @@ void *naive_malloc(size_t size)
 			heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 		}
 		heap.first_block->total_bytes = aligned_sz;
-		heap.first_block->used_bytes = aligned_sz;
 		heap.heap_free = heap.heap_size - (8 + aligned_sz);
 		heap.total_blocks = 1;
 		ptr = heap.first_block + 1;

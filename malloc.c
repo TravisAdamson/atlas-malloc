@@ -65,8 +65,8 @@ header_t *move_block(size_t size)
 		if (size <= (current->total_bytes - current->used_bytes))
 		{
 			current = (header_t *)((char *)current + sizeof(header_t) + total);
-			current->total_bytes = total - used - BLOCK_SZ;
-			current->used_bytes = size - BLOCK_SZ;
+			current->total_bytes = total - used - BLOCK_SIZE;
+			current->used_bytes = size - BLOCK_SIZE;
 			return (current);
 		}
 		current = (header_t *)((char *)current + sizeof(header_t) + total);

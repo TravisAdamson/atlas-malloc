@@ -46,7 +46,7 @@ void *naive_malloc(size_t size)
  * @size: Size user requests plus block header
  * Return: pointer to big enough chunk for size
 */
-n_header_t *naive_hopper(size_t size)
+n_header_t *n_move_block(size_t size)
 {
 	size_t i = 0, total = 0;
 	n_header_t *current;

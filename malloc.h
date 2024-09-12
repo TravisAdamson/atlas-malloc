@@ -10,6 +10,15 @@
 #define BLOCK_SIZE sizeof(header_t)
 
 /**
+ * struct n_header_s - stores header data for each block
+ * @total_bytes: total number of bytes allocated
+*/
+typedef struct n_header_s
+{
+	size_t total_bytes;
+} n_header_t;
+
+/**
  * struct header_s - stores header data for each block
  * @total_bytes: total number of bytes allocated
  * @used_bytes: number of bytes used

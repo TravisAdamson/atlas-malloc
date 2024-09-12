@@ -39,7 +39,7 @@ void *naive_malloc(size_t size)
 		heap.heap_size += getpagesize(), heap.heap_free += getpagesize();
 	}
 	/*Traversing Header Blocks and adjusting data structs*/
-	ptr = move_block((8 + aligned_sz));
+	ptr = n_move_block((8 + aligned_sz));
 	heap.total_blocks++;
 	heap.heap_free -= (8 + aligned_sz);
 	return ((void *) ++ptr);

@@ -3,7 +3,7 @@
 static n_heap_t heap = {NULL, 0, 0, 0};
 
 /**
- * _malloc - Allocates memory in the heap
+ * naive_malloc - Allocates memory in the heap
  * @size: size of memory to allocate
  * Return: returns a pointer to the allocated memory
 */
